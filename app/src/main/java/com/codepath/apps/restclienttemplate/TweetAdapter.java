@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         //populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+        holder.tvTime.setText(tweet.time);
         Glide.with(context)
                 .load(tweet.user.profileImageURL)
                 .into(holder.ivProfileImage);
@@ -61,6 +63,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
+        public TextView tvTime;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -69,6 +72,24 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
         }
     }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        Log.d("***", "clear start");
+        mTweets.clear();
+        notifyDataSetChanged();
+        Log.d("***", "clear end");
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        Log.d("***", "add start");
+        mTweets.addAll(list);
+        notifyDataSetChanged();
+        Log.d("***", "add end");
+    }
+
 }
