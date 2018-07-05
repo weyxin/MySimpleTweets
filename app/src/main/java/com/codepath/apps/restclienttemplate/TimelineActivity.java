@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,10 +36,8 @@ public class TimelineActivity extends AppCompatActivity {
         //send the network request to fetch the updated data
         //client is an instance of Android Async HTTP
         //getHomeTimeline is an example endpoint
-        Log.d("***", "fetch start");
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Log.d("***", "onSuccess start");
                 //clear out the old items
                 tweetAdapter.clear();
                 tweets.clear();
@@ -78,9 +77,7 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("***", "onRefresh start");
                 fetchTimelineAsync(0);
-                Log.d("***", "onRefresh end");
             }
         });
         //find the RecyclerView
@@ -98,6 +95,9 @@ public class TimelineActivity extends AppCompatActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         populateTimeline();
     }
 

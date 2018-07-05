@@ -22,4 +22,20 @@ public class User{
         user.profileImageURL = jsonObject.getString("profile_image_url");
         return user;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public String getProfileImageURL() {
+        return profileImageURL;
+    }
 }

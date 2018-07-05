@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -59,7 +62,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
     }
 
     //create the ViewHolder class
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
@@ -73,23 +76,45 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            itemView.setOnClickListener(this);
+            //Log.d("*", "set up click listener");
+        }
+
+        @Override
+        public void onClick(View v) {
+            //gets item position
+            int position = getAdapterPosition();
+            // make sure the position is valid, i.e. actually exists in the view
+            if (position != RecyclerView.NO_POSITION) {
+                // get the movie at the position, this won't work if the class is static
+                Tweet tweet = mTweets.get(position);
+                Log.d("*", "got tweet position");
+                Intent intent = new Intent(context, TweetDetailsActivity.class);
+                Log.d("*", "set up intent");
+                //serialize the movie using parceler, use its short name as a key
+                intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                Log.d("*", "parceled movie");
+                // show the activity
+                context.startActivity(intent);
+                Log.d("*", "done with click activity");
+            }
         }
     }
 
     // Clean all elements of the recycler
     public void clear() {
-        Log.d("***", "clear start");
+        //Log.d("***", "clear start");
         mTweets.clear();
         notifyDataSetChanged();
-        Log.d("***", "clear end");
+        //Log.d("***", "clear end");
     }
 
     // Add a list of items -- change to type used
     public void addAll(List<Tweet> list) {
-        Log.d("***", "add start");
+        //Log.d("***", "add start");
         mTweets.addAll(list);
         notifyDataSetChanged();
-        Log.d("***", "add end");
+        //Log.d("***", "add end");
     }
 
 }

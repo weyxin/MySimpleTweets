@@ -18,17 +18,19 @@ public class Tweet{
     public User user;
     public String createdAt;
     public String time;
+    public boolean truncated;
 
     //serialize JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException{
         Tweet tweet = new Tweet();
 
         //extract values from JSON
-        tweet.body = jsonObject.getString("text");
+        tweet.body = jsonObject.getString("full_text");
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.time = Tweet.getRelativeTimeAgo(jsonObject.getString("created_at"));
+        tweet.truncated = jsonObject.getBoolean("truncated");
         return tweet;
     }
 
@@ -48,5 +50,25 @@ public class Tweet{
         }
 
         return relativeDate;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getTime() {
+        return time;
     }
 }
