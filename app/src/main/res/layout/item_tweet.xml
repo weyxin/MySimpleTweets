@@ -23,6 +23,16 @@
         android:text="TextView" />
 
     <TextView
+        android:id="@+id/favoriteCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_alignLeft="@+id/heart_button"
+        android:layout_alignTop="@+id/heart_button"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,8 +68,8 @@
         android:layout_marginLeft="270dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tvBody"
-        android:background="@null"
-        app:srcCompat="@drawable/ic_vector_heart_stroke" />
+        android:onClick="onHeartClick"
+        android:background="@drawable/heart_button" />
 
     <ImageButton
         android:id="@+id/retweet_button"
@@ -79,5 +89,16 @@
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/tvUserName"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/retweetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_alignLeft="@+id/retweet_button"
+        android:layout_alignTop="@+id/retweet_button"
+        android:text="TextView" />
+
 
 </RelativeLayout>

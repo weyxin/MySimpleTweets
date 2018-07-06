@@ -52,6 +52,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         holder.tvBody.setText(tweet.body);
         holder.tvTime.setText(tweet.time);
         holder.tvHandle.setText("@" + tweet.user.getScreenName());
+        holder.favoriteCount.setText(Long.toString(tweet.getFavorites()));
+        holder.retweetCount.setText(Long.toString(tweet.getRetweets()));
         Glide.with(context)
                 .load(tweet.user.profileImageURL)
                 .into(holder.ivProfileImage);
@@ -69,6 +71,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public TextView tvBody;
         public TextView tvTime;
         public TextView tvHandle;
+        public TextView favoriteCount;
+        public TextView retweetCount;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -78,8 +82,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
+            favoriteCount = (TextView) itemView.findViewById(R.id.favoriteCount);
+            retweetCount = (TextView) itemView.findViewById(R.id.retweetCount);
             itemView.setOnClickListener(this);
-            //Log.d("*", "set up click listener");
         }
 
         @Override

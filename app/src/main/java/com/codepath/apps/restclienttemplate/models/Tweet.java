@@ -19,18 +19,23 @@ public class Tweet{
     public String createdAt;
     public String time;
     public Boolean isReplying;
+    public long favorites;
+    public Boolean isFavorited;
+    public long retweets;
 
     //serialize JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException{
         Tweet tweet = new Tweet();
         //extract values from JSON
-        //tweet.body = jsonObject.getString("full_text");
         tweet.body = jsonObject.getString("text");
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.time = Tweet.getRelativeTimeAgo(jsonObject.getString("created_at"));
         tweet.isReplying = false;
+        tweet.isFavorited = jsonObject.getBoolean("favorited");
+        tweet.favorites = jsonObject.getLong("favorite_count");
+        tweet.retweets = jsonObject.getLong("retweet_count");
         return tweet;
     }
 
@@ -70,5 +75,21 @@ public class Tweet{
 
     public String getTime() {
         return time;
+    }
+
+    public Boolean getReplying() {
+        return isReplying;
+    }
+
+    public long getFavorites() {
+        return favorites;
+    }
+
+    public Boolean getFavorited() {
+        return isFavorited;
+    }
+
+    public long getRetweets() {
+        return retweets;
     }
 }
