@@ -38,10 +38,8 @@ public class TweetDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet_details);
         client = new AsyncHttpClient();
-        // unwrap the tweet passed in via intent, using its username as a key
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
         ButterKnife.bind(this);
-        // set the username and tweet body
         Log.d("details", Long.toString(tweet.getFavorites()));
         tvBody.setText(tweet.getBody());
         tvUserName.setText(tweet.getUser().getName());
@@ -57,15 +55,18 @@ public class TweetDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 heartButton.setSelected(!heartButton.isSelected());
                 if(heartButton.isSelected()) {
+                    tweet.favorites += 1;
+                    favoriteCount.setText(Long.toString(tweet.favorites));
                     heartButton.setBackgroundResource(R.drawable.ic_vector_heart);
                 }
                 else {
+                    tweet.favorites -= 1;
+                    favoriteCount.setText(Long.toString(tweet.favorites));
                     heartButton.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
                 }
             }
         });
         replyButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.d("details", "clicked reply");
