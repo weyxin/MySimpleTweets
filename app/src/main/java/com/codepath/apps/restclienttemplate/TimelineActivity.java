@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -111,7 +113,17 @@ public class TimelineActivity extends AppCompatActivity {
     public void onComposeAction(MenuItem mi) {
         // handle click here
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+        TextView handle = findViewById(R.id.tvHandle);
+        i.putExtra("compose", "");
         startActivityForResult(i, composeCode);
+    }
+
+    public void onReplyClick(View v) {
+        Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+        TextView handle = findViewById(R.id.tvHandle);
+        String handleName = handle.getText().toString();
+        intent.putExtra("compose", handleName);
+        startActivityForResult(intent, composeCode);
     }
 
     private void populateTimeline() {

@@ -51,6 +51,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
         holder.tvTime.setText(tweet.time);
+        holder.tvHandle.setText("@" + tweet.user.getScreenName());
         Glide.with(context)
                 .load(tweet.user.profileImageURL)
                 .into(holder.ivProfileImage);
@@ -67,15 +68,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         public TextView tvUsername;
         public TextView tvBody;
         public TextView tvTime;
+        public TextView tvHandle;
 
         public ViewHolder (View itemView) {
             super(itemView);
-
             //perform findViewByID lookups
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+            tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
             itemView.setOnClickListener(this);
             //Log.d("*", "set up click listener");
         }

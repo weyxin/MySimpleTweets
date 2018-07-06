@@ -1,9 +1,11 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     @BindView(R.id.tvBody) TextView tvBody;
     @BindView(R.id.tvUserName) TextView tvUserName;
     @BindView(R.id.ivProfileImage) ImageView background;
+    int composeCode = 20;
     AsyncHttpClient client;
 
     @Override
@@ -39,5 +42,13 @@ public class TweetDetailsActivity extends AppCompatActivity {
         Glide.with(getApplicationContext())
                 .load(tweet.user.profileImageURL)
                 .into(background);
+    }
+
+    public void onReplyClick(View v) {
+        Intent intent = new Intent(TweetDetailsActivity.this, ComposeActivity.class);
+        TextView handle = findViewById(R.id.tvHandle);
+        String handleName = handle.getText().toString();
+        intent.putExtra("compose", handleName);
+        startActivityForResult(intent, composeCode);
     }
 }

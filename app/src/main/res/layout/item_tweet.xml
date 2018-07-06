@@ -16,6 +16,7 @@
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="57dp"
@@ -36,5 +37,47 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
         android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/reply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        android:layout_below="@+id/tvBody"
+        android:onClick="onReplyClick"
+        android:background="@null"
+        app:srcCompat="@drawable/twitter_reply" />
+
+    <ImageButton
+        android:id="@+id/heart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvBody"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_vector_heart_stroke" />
+
+    <ImageButton
+        android:id="@+id/retweet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="172dp"
+        android:layout_below="@+id/tvBody"
+        android:background="@null"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke" />
+
+    <TextView
+        android:id="@+id/tvHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:text="TextView" />
+
 </RelativeLayout>

@@ -38,6 +38,12 @@ public class ComposeActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
         tweetButton = (Button) findViewById(R.id.Tweet);
         composeText = (EditText) findViewById(R.id.composeText);
+        Intent intent = getIntent();
+        String handle = intent.getExtras().getString("compose");
+        if(handle != "") {
+            composeText.setText(handle);
+        }
+
         composeText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -53,17 +59,18 @@ public class ComposeActivity extends AppCompatActivity {
         tweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("tweet", "clicked tweet button");
                 composeText = (EditText) findViewById(R.id.composeText);
                 String text = composeText.getText().toString();
                 //send network request
                 networkRequest(text);
+                Log.d("tweet", "network request done");
             }
         });
     }
 
     private void networkRequest(String text) {
         client.sendTweet(text, new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("TwitterClient", response.toString());
