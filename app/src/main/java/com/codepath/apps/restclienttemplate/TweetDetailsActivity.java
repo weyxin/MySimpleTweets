@@ -30,6 +30,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     @BindView(R.id.favoriteCount) TextView favoriteCount;
     @BindView(R.id.heart_button) ImageButton heartButton;
     @BindView(R.id.reply_button) ImageButton replyButton;
+    @BindView(R.id.retweet_button) ImageButton retweetButton;
     int composeCode = 20;
     AsyncHttpClient client;
 
@@ -69,13 +70,27 @@ public class TweetDetailsActivity extends AppCompatActivity {
         replyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("details", "clicked reply");
                 Intent intent = new Intent(TweetDetailsActivity.this, ComposeActivity.class);
                 TextView handle = findViewById(R.id.tvHandle);
                 String handleName = handle.getText().toString();
                 intent.putExtra("compose", handleName);
-                Log.d("details", "reply intent done");
                 startActivityForResult(intent, composeCode);
+            }
+        });
+        retweetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retweetButton.setSelected(!heartButton.isSelected());
+                if(retweetButton.isSelected()) {
+                    tweet.retweets += 1;
+                    retweetCount.setText(Long.toString(tweet.retweets));
+                    retweetButton.setBackgroundResource(R.drawable.ic_vector_retweet);
+                }
+                else {
+                    tweet.retweets -= 1;
+                    retweetCount.setText(Long.toString(tweet.retweets));
+                    retweetButton.setBackgroundResource(R.drawable.ic_vector_retweet_stroke);
+                }
             }
         });
     }

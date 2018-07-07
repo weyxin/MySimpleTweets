@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <item
         android:id="@+id/Compose"
-        android:icon="@drawable/vector_compose_shortcut"
+        android:icon="@drawable/vector_compose_fab"
         android:onClick="onComposeAction"
         android:tint="@color/twitter_blue"
         android:title="Compose"
         app:showAsAction="always"></item>
-
 </menu>

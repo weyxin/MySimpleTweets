@@ -74,6 +74,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         @BindView(R.id.retweetCount) TextView retweetCount;
         @BindView(R.id.reply_button) ImageButton replyButton;
         @BindView(R.id.heart_button) ImageButton heartButton;
+        @BindView(R.id.retweet_button) ImageButton retweetButton;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -108,6 +109,26 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
                             tweet.favorites -= 1;
                             favoriteCount.setText(Long.toString(tweet.favorites));
                             heartButton.setBackgroundResource(R.drawable.ic_vector_heart_stroke);
+                        }
+                    }
+                }
+            });
+            retweetButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION) {
+                        Tweet tweet = mTweets.get(position);
+                        retweetButton.setSelected(!retweetButton.isSelected());
+                        if(retweetButton.isSelected()) {
+                            tweet.retweets += 1;
+                            retweetCount.setText(Long.toString(tweet.retweets));
+                            retweetButton.setBackgroundResource(R.drawable.ic_vector_retweet);
+                        }
+                        else {
+                            tweet.retweets -= 1;
+                            retweetCount.setText(Long.toString(tweet.retweets));
+                            retweetButton.setBackgroundResource(R.drawable.ic_vector_retweet_stroke);
                         }
                     }
                 }
