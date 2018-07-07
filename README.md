@@ -2,7 +2,7 @@
 
 **MySimpleTweets** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **20** hours spent in total
+Time spent: **23** hours spent in total
 
 ## User Stories
 
@@ -52,7 +52,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![Walkthrough](tweetsGIF.gif)
+![Walkthrough](tweets2GIF.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
